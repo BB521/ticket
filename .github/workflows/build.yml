@@ -6,9 +6,8 @@ on:
       - master
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -18,18 +17,15 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies (if needed)
-        run: |
-          npm install
+      - name: Install dependencies
+        run: npm install
 
       - name: Generate index.html
         run: |
           mkdir -p dist
           node generate-index.js
-          mv index.html dist/
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: . # 注意这里是当前目录
