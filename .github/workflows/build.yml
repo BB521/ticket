@@ -1,9 +1,12 @@
-name: Build and Deploy Docs
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
     branches:
       - master
+
+permissions:
+  contents: write  # 🔥 这是关键
 
 jobs:
   build:
@@ -11,21 +14,20 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm install
+          node-version: 18
 
       - name: Generate index.html
-        run: npm run build
+        run: |
+          npm install
+          npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./  # 确保这个路径中包含 index.html
+          publish_dir: .
