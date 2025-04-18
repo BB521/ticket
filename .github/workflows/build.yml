@@ -28,4 +28,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .   # 根目录包含 index.html 和 articles 文件夹
+          publish_dir: ./  # 确保这个路径中包含 index.html
