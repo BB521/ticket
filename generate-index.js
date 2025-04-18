@@ -40,7 +40,7 @@ function generateIndex() {
 </html>
 `;
 
-  fs.writeFileSync("./dist/index.html", html); // ✅ 替换原来的输出路径
+  fs.writeFileSync("./index.html", html); // ✅ 替换原来的输出路径
   console.log("✅ index.html 生成成功");
 }
 
